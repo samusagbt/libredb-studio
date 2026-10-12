@@ -2304,6 +2304,15 @@ describe("Snowflake's confirmation forms", () => {
     }
   });
 
+  test("a form's later words may sit behind comments and line breaks, and a cut-off form does not ask", () => {
+    expect(isDangerousQuery("CREATE /* x */ OR ALTER TABLE t (a INT)", "snowflake")).toBe(true);
+    expect(isDangerousQuery("CREATE -- x\nOR\n  ALTER TABLE t (a INT)", "snowflake")).toBe(true);
+    expect(isDangerousQuery("EXECUTE // x\n ALERT a", "snowflake")).toBe(true);
+    expect(isDangerousQuery("CREATE OR", "snowflake")).toBe(false);
+    expect(isDangerousQuery("CREATE OR /* x */", "snowflake")).toBe(false);
+    expect(isDangerousQuery("EXECUTE 'ALERT'", "snowflake")).toBe(false);
+  });
+
   test("a form after a read, inside a block, behind a procedure definition or a SYSTEM$ call asks", () => {
     expect(isDangerousQuery("SELECT 1; EXECUTE IMMEDIATE 'SELECT 2'", "snowflake")).toBe(true);
     expect(isDangerousQuery("BEGIN CREATE OR REPLACE TABLE t AS SELECT 1; END", "snowflake")).toBe(true);
