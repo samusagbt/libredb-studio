@@ -1,0 +1,52 @@
+{
+  "scenario": "refusal-403",
+  "connection": {
+    "user": "studio_reader",
+    "authMethod": "keypair",
+    "role": "STUDIO_RO",
+    "warehouse": "STUDIO_PROBE_WH",
+    "database": "STUDIO_DEMO",
+    "schema": "PROBE"
+  },
+  "exchanges": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/v2/statements?async=true&requestId=00000000-0000-0000-0000-000000000008",
+        "headers": {
+          "authorization": "Bearer <token-5>",
+          "x-snowflake-authorization-token-type": "KEYPAIR_JWT",
+          "accept": "application/json",
+          "user-agent": "LibreDB-Studio",
+          "content-type": "application/json"
+        },
+        "body": {
+          "statement": "SHOW WAREHOUSES LIKE 'STUDIO_PROBE_WH'",
+          "timeout": 30,
+          "database": "STUDIO_DEMO",
+          "schema": "PROBE",
+          "warehouse": "STUDIO_PROBE_WH",
+          "role": "STUDIO_RO",
+          "parameters": {
+            "multi_statement_count": "1",
+            "query_tag": "libredb-studio:connect",
+            "client_result_chunk_size": 16,
+            "rows_per_resultset": 100001,
+            "timezone": "UTC"
+          }
+        },
+        "dropped": []
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "content-type": "text/html"
+        },
+        "body": {
+          "text": "<html><body>403 Forbidden</body></html>"
+        },
+        "dropped": []
+      }
+    }
+  ]
+}

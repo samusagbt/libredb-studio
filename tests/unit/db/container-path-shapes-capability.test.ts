@@ -49,6 +49,8 @@ const EXPECTED_CONTAINER_PATH_SHAPES: Readonly<
   // Two levels, the catalog and the database, each path exactly as deep (design 2.4).
   databend: "exact",
   bigquery: "exact",
+  // Two levels, the database and the schema, each path exactly as deep.
+  snowflake: "exact",
   // No container level at all: buckets are object rows, so no path shape is declared.
   s3: "absent",
   kubernetes: "exact",

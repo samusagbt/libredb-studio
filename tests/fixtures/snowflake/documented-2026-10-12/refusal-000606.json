@@ -1,0 +1,195 @@
+{
+  "scenario": "refusal-000606",
+  "connection": {
+    "user": "studio_reader",
+    "authMethod": "keypair",
+    "role": "STUDIO_NOWH",
+    "warehouse": "",
+    "database": "STUDIO_DEMO",
+    "schema": "PROBE"
+  },
+  "exchanges": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/v2/statements?async=true&requestId=00000000-0000-0000-0000-000000000009",
+        "headers": {
+          "authorization": "Bearer <token-6>",
+          "x-snowflake-authorization-token-type": "KEYPAIR_JWT",
+          "accept": "application/json",
+          "user-agent": "LibreDB-Studio",
+          "content-type": "application/json"
+        },
+        "body": {
+          "statement": "SHOW DATABASES LIMIT 1",
+          "timeout": 30,
+          "database": "STUDIO_DEMO",
+          "schema": "PROBE",
+          "role": "STUDIO_NOWH",
+          "parameters": {
+            "multi_statement_count": "1",
+            "query_tag": "libredb-studio:connect",
+            "client_result_chunk_size": 16,
+            "rows_per_resultset": 100001,
+            "timezone": "UTC"
+          }
+        },
+        "dropped": []
+      },
+      "response": {
+        "status": 202,
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "code": "333334",
+          "message": "Asynchronous execution in progress. Use provided query id to perform query monitoring and management.",
+          "statementHandle": "00000000-0000-0000-0000-000000000010",
+          "statementStatusUrl": "/api/v2/statements/00000000-0000-0000-0000-000000000010"
+        },
+        "dropped": []
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v2/statements/00000000-0000-0000-0000-000000000010",
+        "headers": {
+          "authorization": "Bearer <token-6>",
+          "x-snowflake-authorization-token-type": "KEYPAIR_JWT",
+          "accept": "application/json",
+          "user-agent": "LibreDB-Studio"
+        },
+        "dropped": []
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "resultSetMetaData": {
+            "numRows": 1,
+            "format": "jsonv2",
+            "partitionInfo": [
+              {
+                "rowCount": 1,
+                "uncompressedSize": 50
+              }
+            ],
+            "rowType": [
+              {
+                "name": "created_on",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "name",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "owner",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              }
+            ]
+          },
+          "data": [
+            [
+              "2026-10-12 02:00:00.000 -0700",
+              "SNOWFLAKE",
+              ""
+            ]
+          ],
+          "code": "090001",
+          "statementStatusUrl": "/api/v2/statements/00000000-0000-0000-0000-000000000010",
+          "sqlState": "00000",
+          "statementHandle": "00000000-0000-0000-0000-000000000010",
+          "message": "Statement executed successfully.",
+          "createdOn": 1791800000000
+        },
+        "dropped": [
+          "requestId"
+        ]
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/v2/statements?async=true&requestId=00000000-0000-0000-0000-000000000011",
+        "headers": {
+          "authorization": "Bearer <token-6>",
+          "x-snowflake-authorization-token-type": "KEYPAIR_JWT",
+          "accept": "application/json",
+          "user-agent": "LibreDB-Studio",
+          "content-type": "application/json"
+        },
+        "body": {
+          "statement": "SELECT CURRENT_ROLE() AS r, CURRENT_SECONDARY_ROLES() AS s",
+          "timeout": 30,
+          "database": "STUDIO_DEMO",
+          "schema": "PROBE",
+          "role": "STUDIO_NOWH",
+          "parameters": {
+            "multi_statement_count": "1",
+            "query_tag": "libredb-studio:role-check",
+            "client_result_chunk_size": 16,
+            "rows_per_resultset": 100001,
+            "timezone": "UTC"
+          }
+        },
+        "dropped": []
+      },
+      "response": {
+        "status": 202,
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "code": "333334",
+          "message": "Asynchronous execution in progress. Use provided query id to perform query monitoring and management.",
+          "statementHandle": "00000000-0000-0000-0000-000000000012",
+          "statementStatusUrl": "/api/v2/statements/00000000-0000-0000-0000-000000000012"
+        },
+        "dropped": []
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v2/statements/00000000-0000-0000-0000-000000000012",
+        "headers": {
+          "authorization": "Bearer <token-6>",
+          "x-snowflake-authorization-token-type": "KEYPAIR_JWT",
+          "accept": "application/json",
+          "user-agent": "LibreDB-Studio"
+        },
+        "dropped": []
+      },
+      "response": {
+        "status": 422,
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "code": "000606",
+          "sqlState": "57P03",
+          "message": "No active warehouse selected in the current session.  Select an active warehouse with the 'use warehouse' command.\n",
+          "statementHandle": "00000000-0000-0000-0000-000000000012",
+          "statementStatusUrl": "/api/v2/statements/00000000-0000-0000-0000-000000000012"
+        },
+        "dropped": []
+      }
+    }
+  ]
+}

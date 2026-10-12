@@ -1,0 +1,54 @@
+{
+  "scenario": "refusal-390189",
+  "connection": {
+    "user": "studio_svc",
+    "authMethod": "keypair",
+    "role": "STUDIO_NOWH",
+    "warehouse": "STUDIO_PROBE_WH",
+    "database": "STUDIO_DEMO",
+    "schema": "PROBE"
+  },
+  "exchanges": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/v2/statements?async=true&requestId=00000000-0000-0000-0000-000000000007",
+        "headers": {
+          "authorization": "Bearer <token-4>",
+          "x-snowflake-authorization-token-type": "KEYPAIR_JWT",
+          "accept": "application/json",
+          "user-agent": "LibreDB-Studio",
+          "content-type": "application/json"
+        },
+        "body": {
+          "statement": "SHOW WAREHOUSES LIKE 'STUDIO_PROBE_WH'",
+          "timeout": 30,
+          "database": "STUDIO_DEMO",
+          "schema": "PROBE",
+          "warehouse": "STUDIO_PROBE_WH",
+          "role": "STUDIO_NOWH",
+          "parameters": {
+            "multi_statement_count": "1",
+            "query_tag": "libredb-studio:connect",
+            "client_result_chunk_size": 16,
+            "rows_per_resultset": 100001,
+            "timezone": "UTC"
+          }
+        },
+        "dropped": []
+      },
+      "response": {
+        "status": 422,
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "code": "390189",
+          "sqlState": "08004",
+          "message": "Role 'STUDIO_NOWH' specified in the connect string is not granted to this user. Contact your local system administrator, or attempt to login with another role, e.g. PUBLIC."
+        },
+        "dropped": []
+      }
+    }
+  ]
+}

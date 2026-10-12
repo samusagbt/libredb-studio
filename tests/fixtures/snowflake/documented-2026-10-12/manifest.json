@@ -1,0 +1,29 @@
+{
+  "provisional": true,
+  "source": "Snowflake SQL API reference, documented response shapes",
+  "written": "2026-10-12",
+  "commit": "5b3e1c0050033c854685beb66a26f0a7be17d684",
+  "scenarios": [
+    "cancel",
+    "connect-keypair",
+    "connect-pat",
+    "describe-columns",
+    "every-type",
+    "monitoring-started",
+    "monitoring-suspended",
+    "refusal-000606",
+    "refusal-002003",
+    "refusal-003001",
+    "refusal-390144",
+    "refusal-390189",
+    "refusal-403",
+    "refusal-404",
+    "refusal-422",
+    "role-check-match",
+    "role-check-mismatch",
+    "role-check-secondary",
+    "role-restricted-pat-show",
+    "three-partitions-cut",
+    "tree-show"
+  ]
+}

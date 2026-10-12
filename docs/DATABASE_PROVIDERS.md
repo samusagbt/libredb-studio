@@ -512,7 +512,7 @@ Provider-specific behaviour — pooling model, SSL/encryption, pagination, monit
 maintenance operations, and known limitations — is documented per provider under
 [`docs/providers/`](./providers/README.md). Start there for anything specific to PostgreSQL, MySQL,
 Oracle, Db2 LUW, SQL Server, SQLite, libSQL, DuckDB, Redis, MongoDB, Couchbase, ClickHouse, Apache Druid,
-Elasticsearch, OpenSearch, Trino, Apache Cassandra, Prometheus, InfluxDB (InfluxQL), InfluxDB 3 (SQL),
+Elasticsearch, OpenSearch, Trino, Snowflake, Apache Cassandra, Prometheus, InfluxDB (InfluxQL), InfluxDB 3 (SQL),
 Apache Kafka, RabbitMQ, etcd, Neo4j, Milvus, Qdrant, Oxia, Databend, S3-compatible object storage, Kubernetes, or LibreDB.
 
 Not every provider has every feature, and the docs record the absences rather than glossing over

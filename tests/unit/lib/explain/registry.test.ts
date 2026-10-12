@@ -21,8 +21,15 @@ const EVERY_FORMAT: Record<ExplainFormat, true> = {
   "duckdb-json": true,
   "databend-text": true,
   "bigquery-dryrun": true,
+  "snowflake-json": true,
   "firestore-explain": true,
 };
+
+/**
+ * The formats that build no background estimate at all, so the editor sends no plan beside a run.
+ * `snowflake-json` is off until a measurement shows `EXPLAIN USING JSON` resumes no warehouse.
+ */
+const ESTIMATE_OFF: ReadonlySet<ExplainFormat> = new Set<ExplainFormat>(["snowflake-json"]);
 
 /**
  * The estimate is what the editor asks for in the background beside every run of a
@@ -31,10 +38,17 @@ const EVERY_FORMAT: Record<ExplainFormat, true> = {
  * (#1311). `ANALYZE` is the word every dialect here uses for its executing form.
  */
 describe("the estimate mode never executes", () => {
-  test.each(Object.keys(EVERY_FORMAT) as ExplainFormat[])("%s builds no ANALYZE for an estimate", (format) => {
-    const built = getExplainStrategy(format)?.buildSql("SELECT 1", "estimate");
-    expect(built).toBeString();
-    expect(built).not.toMatch(/\bANALY[SZ]E\b/i);
+  test.each((Object.keys(EVERY_FORMAT) as ExplainFormat[]).filter((format) => !ESTIMATE_OFF.has(format)))(
+    "%s builds no ANALYZE for an estimate",
+    (format) => {
+      const built = getExplainStrategy(format)?.buildSql("SELECT 1", "estimate");
+      expect(built).toBeString();
+      expect(built).not.toMatch(/\bANALY[SZ]E\b/i);
+    },
+  );
+
+  test.each([...ESTIMATE_OFF])("%s builds no estimate at all", (format) => {
+    expect(getExplainStrategy(format)?.buildSql("SELECT 1", "estimate")).toBeNull();
   });
 });
 
@@ -57,6 +71,10 @@ describe("getExplainStrategy", () => {
 
   test("resolves mysql-text", () => {
     expect(getExplainStrategy("mysql-text")?.format).toBe("mysql-text");
+  });
+
+  test("resolves snowflake-json", () => {
+    expect(getExplainStrategy("snowflake-json")?.format).toBe("snowflake-json");
   });
 
   test("resolves firestore-explain", () => {

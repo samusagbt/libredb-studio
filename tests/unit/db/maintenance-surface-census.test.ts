@@ -105,6 +105,8 @@ const EXPECTED: Readonly<Record<DatabaseType, SurfaceRow>> = {
   // Its one operation is `kill`, a session's and never an object row's (design 2.4).
   databend: NONE,
   bigquery: NONE,
+  // No operation: a kill would reach other users' statements from a shared connection.
+  snowflake: NONE,
   s3: NONE,
   kubernetes: NONE,
   mqtt: NONE,

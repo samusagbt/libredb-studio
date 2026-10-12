@@ -1,0 +1,737 @@
+{
+  "scenario": "describe-columns",
+  "connection": {
+    "user": "studio_reader",
+    "authMethod": "keypair",
+    "role": "STUDIO_RO",
+    "warehouse": "STUDIO_PROBE_WH",
+    "database": "STUDIO_DEMO",
+    "schema": "PROBE"
+  },
+  "exchanges": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/v2/statements?async=true&requestId=00000000-0000-0000-0000-000000000063",
+        "headers": {
+          "authorization": "Bearer <token-12>",
+          "x-snowflake-authorization-token-type": "KEYPAIR_JWT",
+          "accept": "application/json",
+          "user-agent": "LibreDB-Studio",
+          "content-type": "application/json"
+        },
+        "body": {
+          "statement": "SHOW WAREHOUSES LIKE 'STUDIO_PROBE_WH'",
+          "timeout": 30,
+          "database": "STUDIO_DEMO",
+          "schema": "PROBE",
+          "warehouse": "STUDIO_PROBE_WH",
+          "role": "STUDIO_RO",
+          "parameters": {
+            "multi_statement_count": "1",
+            "query_tag": "libredb-studio:connect",
+            "client_result_chunk_size": 16,
+            "rows_per_resultset": 100001,
+            "timezone": "UTC"
+          }
+        },
+        "dropped": []
+      },
+      "response": {
+        "status": 202,
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "code": "333334",
+          "message": "Asynchronous execution in progress. Use provided query id to perform query monitoring and management.",
+          "statementHandle": "00000000-0000-0000-0000-000000000064",
+          "statementStatusUrl": "/api/v2/statements/00000000-0000-0000-0000-000000000064"
+        },
+        "dropped": []
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v2/statements/00000000-0000-0000-0000-000000000064",
+        "headers": {
+          "authorization": "Bearer <token-12>",
+          "x-snowflake-authorization-token-type": "KEYPAIR_JWT",
+          "accept": "application/json",
+          "user-agent": "LibreDB-Studio"
+        },
+        "dropped": []
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "resultSetMetaData": {
+            "numRows": 1,
+            "format": "jsonv2",
+            "partitionInfo": [
+              {
+                "rowCount": 1,
+                "uncompressedSize": 115
+              }
+            ],
+            "rowType": [
+              {
+                "name": "name",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "state",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "type",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "size",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "running",
+                "type": "fixed",
+                "length": null,
+                "precision": 38,
+                "scale": 0,
+                "nullable": true
+              },
+              {
+                "name": "queued",
+                "type": "fixed",
+                "length": null,
+                "precision": 38,
+                "scale": 0,
+                "nullable": true
+              },
+              {
+                "name": "is_default",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "is_current",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "auto_suspend",
+                "type": "fixed",
+                "length": null,
+                "precision": 38,
+                "scale": 0,
+                "nullable": true
+              },
+              {
+                "name": "auto_resume",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "owner",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "resource_monitor",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              }
+            ]
+          },
+          "data": [
+            [
+              "STUDIO_PROBE_WH",
+              "SUSPENDED",
+              "STANDARD",
+              "X-Small",
+              "0",
+              "0",
+              "N",
+              "N",
+              "60",
+              "true",
+              "ACCOUNTADMIN",
+              "STUDIO_PROBE_RM"
+            ]
+          ],
+          "code": "090001",
+          "statementStatusUrl": "/api/v2/statements/00000000-0000-0000-0000-000000000064",
+          "sqlState": "00000",
+          "statementHandle": "00000000-0000-0000-0000-000000000064",
+          "message": "Statement executed successfully.",
+          "createdOn": 1791800000000
+        },
+        "dropped": [
+          "requestId"
+        ]
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/v2/statements?async=true&requestId=00000000-0000-0000-0000-000000000065",
+        "headers": {
+          "authorization": "Bearer <token-12>",
+          "x-snowflake-authorization-token-type": "KEYPAIR_JWT",
+          "accept": "application/json",
+          "user-agent": "LibreDB-Studio",
+          "content-type": "application/json"
+        },
+        "body": {
+          "statement": "SHOW COLUMNS IN TABLE \"STUDIO_DEMO\".\"PROBE\".\"EVERY_TYPE\"",
+          "timeout": 30,
+          "database": "STUDIO_DEMO",
+          "schema": "PROBE",
+          "warehouse": "STUDIO_PROBE_WH",
+          "role": "STUDIO_RO",
+          "parameters": {
+            "multi_statement_count": "1",
+            "query_tag": "libredb-studio:describe",
+            "client_result_chunk_size": 16,
+            "rows_per_resultset": 100001,
+            "timezone": "UTC"
+          }
+        },
+        "dropped": []
+      },
+      "response": {
+        "status": 202,
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "code": "333334",
+          "message": "Asynchronous execution in progress. Use provided query id to perform query monitoring and management.",
+          "statementHandle": "00000000-0000-0000-0000-000000000066",
+          "statementStatusUrl": "/api/v2/statements/00000000-0000-0000-0000-000000000066"
+        },
+        "dropped": []
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v2/statements/00000000-0000-0000-0000-000000000066",
+        "headers": {
+          "authorization": "Bearer <token-12>",
+          "x-snowflake-authorization-token-type": "KEYPAIR_JWT",
+          "accept": "application/json",
+          "user-agent": "LibreDB-Studio"
+        },
+        "dropped": []
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "resultSetMetaData": {
+            "numRows": 4,
+            "format": "jsonv2",
+            "partitionInfo": [
+              {
+                "rowCount": 4,
+                "uncompressedSize": 593
+              }
+            ],
+            "rowType": [
+              {
+                "name": "table_name",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "schema_name",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "column_name",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "data_type",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "null?",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "default",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "kind",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "expression",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "comment",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "database_name",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "autoincrement",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              }
+            ]
+          },
+          "data": [
+            [
+              "EVERY_TYPE",
+              "PROBE",
+              "ID",
+              "{\"type\":\"FIXED\",\"precision\":38,\"scale\":0,\"nullable\":false}",
+              "NOT_NULL",
+              "",
+              "COLUMN",
+              "",
+              "",
+              "STUDIO_DEMO",
+              ""
+            ],
+            [
+              "EVERY_TYPE",
+              "PROBE",
+              "C_TEXT",
+              "{\"type\":\"TEXT\",\"length\":16777216,\"byteLength\":16777216,\"nullable\":true,\"fixed\":false}",
+              "true",
+              "",
+              "COLUMN",
+              "",
+              "",
+              "STUDIO_DEMO",
+              ""
+            ],
+            [
+              "EVERY_TYPE",
+              "PROBE",
+              "C_TS_NTZ",
+              "{\"type\":\"TIMESTAMP_NTZ\",\"precision\":0,\"scale\":9,\"nullable\":true}",
+              "true",
+              "",
+              "COLUMN",
+              "",
+              "",
+              "STUDIO_DEMO",
+              ""
+            ],
+            [
+              "EVERY_TYPE",
+              "PROBE",
+              "C_VARIANT",
+              "{\"type\":\"VARIANT\",\"nullable\":true}",
+              "true",
+              "",
+              "COLUMN",
+              "",
+              "",
+              "STUDIO_DEMO",
+              ""
+            ]
+          ],
+          "code": "090001",
+          "statementStatusUrl": "/api/v2/statements/00000000-0000-0000-0000-000000000066",
+          "sqlState": "00000",
+          "statementHandle": "00000000-0000-0000-0000-000000000066",
+          "message": "Statement executed successfully.",
+          "createdOn": 1791800000000
+        },
+        "dropped": [
+          "requestId"
+        ]
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/v2/statements?async=true&requestId=00000000-0000-0000-0000-000000000067",
+        "headers": {
+          "authorization": "Bearer <token-12>",
+          "x-snowflake-authorization-token-type": "KEYPAIR_JWT",
+          "accept": "application/json",
+          "user-agent": "LibreDB-Studio",
+          "content-type": "application/json"
+        },
+        "body": {
+          "statement": "SHOW PRIMARY KEYS IN TABLE \"STUDIO_DEMO\".\"PROBE\".\"EVERY_TYPE\"",
+          "timeout": 30,
+          "database": "STUDIO_DEMO",
+          "schema": "PROBE",
+          "warehouse": "STUDIO_PROBE_WH",
+          "role": "STUDIO_RO",
+          "parameters": {
+            "multi_statement_count": "1",
+            "query_tag": "libredb-studio:describe",
+            "client_result_chunk_size": 16,
+            "rows_per_resultset": 100001,
+            "timezone": "UTC"
+          }
+        },
+        "dropped": []
+      },
+      "response": {
+        "status": 202,
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "code": "333334",
+          "message": "Asynchronous execution in progress. Use provided query id to perform query monitoring and management.",
+          "statementHandle": "00000000-0000-0000-0000-000000000068",
+          "statementStatusUrl": "/api/v2/statements/00000000-0000-0000-0000-000000000068"
+        },
+        "dropped": []
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v2/statements/00000000-0000-0000-0000-000000000068",
+        "headers": {
+          "authorization": "Bearer <token-12>",
+          "x-snowflake-authorization-token-type": "KEYPAIR_JWT",
+          "accept": "application/json",
+          "user-agent": "LibreDB-Studio"
+        },
+        "dropped": []
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "resultSetMetaData": {
+            "numRows": 1,
+            "format": "jsonv2",
+            "partitionInfo": [
+              {
+                "rowCount": 1,
+                "uncompressedSize": 98
+              }
+            ],
+            "rowType": [
+              {
+                "name": "created_on",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "database_name",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "schema_name",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "table_name",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "column_name",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "key_sequence",
+                "type": "fixed",
+                "length": null,
+                "precision": 38,
+                "scale": 0,
+                "nullable": true
+              },
+              {
+                "name": "constraint_name",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              }
+            ]
+          },
+          "data": [
+            [
+              "2026-10-12 02:10:00.000 -0700",
+              "STUDIO_DEMO",
+              "PROBE",
+              "EVERY_TYPE",
+              "ID",
+              "1",
+              "SYS_CONSTRAINT_1"
+            ]
+          ],
+          "code": "090001",
+          "statementStatusUrl": "/api/v2/statements/00000000-0000-0000-0000-000000000068",
+          "sqlState": "00000",
+          "statementHandle": "00000000-0000-0000-0000-000000000068",
+          "message": "Statement executed successfully.",
+          "createdOn": 1791800000000
+        },
+        "dropped": [
+          "requestId"
+        ]
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/v2/statements?async=true&requestId=00000000-0000-0000-0000-000000000069",
+        "headers": {
+          "authorization": "Bearer <token-12>",
+          "x-snowflake-authorization-token-type": "KEYPAIR_JWT",
+          "accept": "application/json",
+          "user-agent": "LibreDB-Studio",
+          "content-type": "application/json"
+        },
+        "body": {
+          "statement": "SHOW TABLES LIKE 'EVERY_TYPE' IN SCHEMA \"STUDIO_DEMO\".\"PROBE\"",
+          "timeout": 30,
+          "database": "STUDIO_DEMO",
+          "schema": "PROBE",
+          "warehouse": "STUDIO_PROBE_WH",
+          "role": "STUDIO_RO",
+          "parameters": {
+            "multi_statement_count": "1",
+            "query_tag": "libredb-studio:describe",
+            "client_result_chunk_size": 16,
+            "rows_per_resultset": 100001,
+            "timezone": "UTC"
+          }
+        },
+        "dropped": []
+      },
+      "response": {
+        "status": 202,
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "code": "333334",
+          "message": "Asynchronous execution in progress. Use provided query id to perform query monitoring and management.",
+          "statementHandle": "00000000-0000-0000-0000-000000000070",
+          "statementStatusUrl": "/api/v2/statements/00000000-0000-0000-0000-000000000070"
+        },
+        "dropped": []
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v2/statements/00000000-0000-0000-0000-000000000070",
+        "headers": {
+          "authorization": "Bearer <token-12>",
+          "x-snowflake-authorization-token-type": "KEYPAIR_JWT",
+          "accept": "application/json",
+          "user-agent": "LibreDB-Studio"
+        },
+        "dropped": []
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json"
+        },
+        "body": {
+          "resultSetMetaData": {
+            "numRows": 1,
+            "format": "jsonv2",
+            "partitionInfo": [
+              {
+                "rowCount": 1,
+                "uncompressedSize": 86
+              }
+            ],
+            "rowType": [
+              {
+                "name": "created_on",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "name",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "database_name",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "schema_name",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "kind",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              },
+              {
+                "name": "rows",
+                "type": "fixed",
+                "length": null,
+                "precision": 38,
+                "scale": 0,
+                "nullable": true
+              },
+              {
+                "name": "is_hybrid",
+                "type": "text",
+                "length": 16777216,
+                "precision": null,
+                "scale": null,
+                "nullable": true
+              }
+            ]
+          },
+          "data": [
+            [
+              "2026-10-12 02:10:00.000 -0700",
+              "EVERY_TYPE",
+              "STUDIO_DEMO",
+              "PROBE",
+              "TABLE",
+              "2",
+              "N"
+            ]
+          ],
+          "code": "090001",
+          "statementStatusUrl": "/api/v2/statements/00000000-0000-0000-0000-000000000070",
+          "sqlState": "00000",
+          "statementHandle": "00000000-0000-0000-0000-000000000070",
+          "message": "Statement executed successfully.",
+          "createdOn": 1791800000000
+        },
+        "dropped": [
+          "requestId"
+        ]
+      }
+    }
+  ]
+}

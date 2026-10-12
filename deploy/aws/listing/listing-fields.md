@@ -27,7 +27,7 @@ sentence verbatim, which is what the AMI product checklist asks for.
 
 <!-- limit:3 -->
 
-- Thirty-three engines behind one interface, among them PostgreSQL, MySQL, Oracle, SQL Server, MongoDB, Redis, ClickHouse and Trino.
+- Thirty-four engines behind one interface, among them PostgreSQL, MySQL, Oracle, SQL Server, MongoDB, Redis, ClickHouse and Trino.
 - AI query assistance using your own model key, or run it with no AI at all.
 - Self-hosted on a single instance: connections, query history and results stay in your account.
 
