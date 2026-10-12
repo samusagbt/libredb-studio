@@ -415,7 +415,7 @@ describe("docs/providers/snowflake.md", () => {
 
   test("puts no secret in an example and names no private record", () => {
     expect(DOC).not.toMatch(/-----BEGIN (ENCRYPTED |RSA )?PRIVATE KEY-----\s*\n\s*[A-Za-z0-9+/]{20}/);
-    expect(DOC).not.toMatch(/reviews\/|snowflake-design|\/private\//);
+    expect(DOC).not.toMatch(/\/home\/|design record|\/private\//);
     expect(DOC).not.toMatch(/\b(SR|SF|SD|OD)-?\d+/);
     expect(DOC).not.toMatch(/\bM\d{1,3}\b/);
     expect(DOC).not.toMatch(/[–—]/);
